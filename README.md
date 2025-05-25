@@ -2,15 +2,11 @@
 Standalone version of MinaCalc along with a C API for easy access and bindings
 
 # How to build
-MinaCalc requires C++17.
+MinaCalc requires C++20.
 
 The following commands assume GCC and Linux. Adjust the commands to your platform of choice
 
-1. Compile the source files:
-    - `g++ -std=c++17 -O2 -c MinaCalc/MinaCalc.cpp API.cpp`
-    - If the C API is not needed, omit API.cpp: <br/>
-      `g++ -std=c++17 -O2 -c MinaCalc/MinaCalc.cpp`
-2. Link the object files together into a library: `ar rcs libminacalc.a *.o`
+gcc MinaCalc/MinaCalc.cpp API.cpp -DSTANDALONE_CALC -std=c++20 -lstdc++ -lm -shared -fpic -o libminacalc.so
 
 # Example usage
 ```c
