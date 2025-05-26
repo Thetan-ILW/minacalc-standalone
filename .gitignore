@@ -1,1 +1,6 @@
 libminacalc.so
+API.obj
+minacalc.dll
+minacalc.exp
+minacalc.lib
+MinaCalc.obj
