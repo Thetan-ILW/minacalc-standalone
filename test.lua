@@ -32,10 +32,11 @@ ffi.cdef([[
 	void destroy_calc(CalcHandle *calc);
 
 	MsdForAllRates calc_msd(CalcHandle *calc, const NoteInfo *rows, size_t num_rows, const unsigned int keycount);
+	Ssr calc_msd_rate(CalcHandle *calc, const NoteInfo *rows, size_t num_rows, float music_rate, unsigned keycount);
 	Ssr calc_ssr(CalcHandle *calc, NoteInfo *rows, size_t num_rows, float music_rate, float score_goal, const unsigned int keycount);
 ]])
 
-local lib = ffi.load("/media/SSD/Dev/msd_calc_new/minacalc-standalone/libminacalc.so")
+local lib = ffi.load("/media/SSD/Dev/pain/minacalc-standalone/libminacalc.so")
 local calc_handle = lib.create_calc()
 
 ---@param size number
@@ -54,8 +55,8 @@ end
 ---@param target_accuracy number
 ---@param keycount number
 ---@return table
-local function getSsr(rows, row_count, time_rate, target_accuracy, keycount)
-	local ssr = lib.calc_ssr(calc_handle, rows, row_count, time_rate, target_accuracy, keycount)
+local function getMsd(rows, row_count, time_rate, keycount)
+	local ssr = lib.calc_msd_rate(calc_handle, rows, row_count, time_rate,  keycount)
 
 	return {
 		overall = ssr.overall,
@@ -95,7 +96,7 @@ local function test4k()
 		rows[i].rowTime = i * 0.05
 	end
 
-	local ssr = getSsr(rows, row_count, 1.0, 0.93, 4)
+	local ssr = getMsd(rows, row_count, 1.0, 4)
 	local overall = ssr.overall
 	assert(overall > 30, "RESTART THE GAME!!! MinaCalc is not feeling good for some reason." .. overall)
 	print(ssr.overall)
@@ -122,7 +123,7 @@ local function test7k()
 		rows[i].rowTime = i * (bpm(120) / 4)
 	end
 
-	local ssr = getSsr(rows, row_count, 1.0, 0.93, 8)
+	local ssr = getMsd(rows, row_count, 1.0, 8)
 
 	print("streams:", ssr.stream)
 	print("brackets:", ssr.handstream)
@@ -152,7 +153,7 @@ local function test10k()
 
 	print(bpm(120) / 4)
 
-	local ssr = getSsr(rows, row_count, 1.0, 0.93, 10)
+	local ssr = getMsd(rows, row_count, 1.0, 10)
 
 	print("streams:", ssr.stream)
 	print("brackets:", ssr.handstream)

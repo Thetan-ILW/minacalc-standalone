@@ -911,6 +911,22 @@ MinaSDCalc(const std::vector<NoteInfo>& NoteInfo,
 	return allrates;
 }
 
+auto
+MinaSDCalc(const std::vector<NoteInfo>& NoteInfo,
+		   const float musicrate,
+		   const unsigned keycount,
+		   Calc* calc) -> std::vector<float>
+{
+	if (NoteInfo.size() <= 1) {
+		return dimples_the_all_zero_output;
+	}
+	calc->ssr = false;
+	calc->debugmode = false;
+	calc->keycount = keycount;
+
+	return calc->CalcMain(NoteInfo, musicrate, default_score_goal);
+}
+
 // Debug output
 void
 MinaSDCalcDebug(

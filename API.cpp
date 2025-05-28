@@ -47,6 +47,19 @@ extern "C" {
 		return all_rates;
 	}
 
+	Ssr calc_msd_rate(CalcHandle *calc, const NoteInfo *rows, size_t num_rows, float music_rate, unsigned keycount) {
+		std::vector<NoteInfo> note_info(rows, rows + num_rows);
+
+		auto skillsets = MinaSDCalc(
+			note_info,
+			music_rate,
+			keycount,
+			reinterpret_cast<Calc*>(calc)
+		);
+
+		return skillset_vector_to_ssr(skillsets);
+	}
+
 	Ssr calc_ssr(CalcHandle *calc, NoteInfo *rows, size_t num_rows, float music_rate, float score_goal, unsigned keycount) {
 		std::vector<NoteInfo> note_info(rows, rows + num_rows);
 
