@@ -1,4 +1,5 @@
 libminacalc.so
+libminacalc.dylib
 API.obj
 minacalc.dll
 minacalc.exp
