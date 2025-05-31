@@ -189,13 +189,12 @@ Calc::CalcMain(const std::vector<NoteInfo>& NoteInfo,
 		 * 38 is still unachieved so a cap of 40 [sic] is _extremely_ generous
 		 * do this for SCORES only, not cached file difficulties */
 		if (ssr) {
-			static const auto ssrcap = 40.F;
 			for (auto& r : iteration_skillet_values) {
 				// so 50%s on 60s don't give 35s
 				r = downscale_low_accuracy_scores(r, score_goal);
-				r = std::min(r, ssrcap);
 
 				if (highest_stam_adjusted_skillset == Skill_JackSpeed) {
+					r = std::min(r, 35.0F);
 					r = downscale_low_accuracy_scores(r, score_goal);
 				}
 			}

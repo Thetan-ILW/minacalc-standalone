@@ -8,7 +8,7 @@ constexpr float max_rating = 100.F;
 constexpr float min_rating = 0.F;
 constexpr float default_score_goal = 0.93F;
 constexpr float low_acc_cutoff = 0.9F;
-constexpr float ssr_goal_cap = 0.965F;
+constexpr float ssr_goal_cap = 1.0F;
 
 static const std::vector<float> dimples_the_all_zero_output{
 	min_rating, min_rating, min_rating, min_rating,
