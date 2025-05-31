@@ -1,0 +1,2 @@
+#!/bin/bash
+gcc MinaCalc/MinaCalc.cpp API.cpp -DSTANDALONE_CALC -O2 -std=c++20 -lstdc++ -lm -shared -fpic -o libminacalc.so
