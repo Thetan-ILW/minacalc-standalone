@@ -4,9 +4,15 @@ Standalone version of MinaCalc along with a C API for easy access and bindings
 # How to build
 MinaCalc requires C++20.
 
-The following commands assume GCC and Linux. Adjust the commands to your platform of choice
+## Windows
+Install Visual Studio 2022
+Run `build.bat`
 
-gcc MinaCalc/MinaCalc.cpp API.cpp -DSTANDALONE_CALC -std=c++20 -lstdc++ -lm -shared -fpic -o libminacalc.so
+## Linux
+Run `build-linux`
+
+## MacOS
+Run `build-macos`
 
 # Example usage
 ```c
